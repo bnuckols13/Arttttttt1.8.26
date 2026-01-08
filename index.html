@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive & Stillness - Expressive Arts Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Energy/Drive Colors */
+            --fire-orange: #FF6B35;
+            --bright-amber: #F7931E;
+            --electric-gold: #FFD23F;
+            
+            /* Stillness/Inertia Colors */
+            --deep-indigo: #4A5567;
+            --slate-blue: #6B7B8C;
+            --cool-gray: #8B94A1;
+            
+            /* Nature Balance */
+            --earth-brown: #8B5A3C;
+            --sage-green: #87A878;
+            --deep-teal: #14B8A6;
+            
+            /* Base */
+            --midnight: #1E293B;
+            --slate: #475569;
+            --pearl: #F8FAFC;
+            --cream: #FFF8E7;
+            
+            /* Gradients */
+            --gradient-fire: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            --gradient-stillness: linear-gradient(135deg, #4A5567 0%, #6B7B8C 100%);
+            --gradient-balance: linear-gradient(135deg, #87A878 0%, #14B8A6 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #FFF8E715 0%, #4A556715 100%);
+            min-height: 100vh;
+            color: var(--midnight);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating elements - representing energy particles */
+        .bg-element {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        .energy-particle {
+            width: 250px;
+            height: 250px;
+            background: var(--fire-orange);
+            top: 10%;
+            right: 5%;
+            animation: pulse-energy 8s infinite ease-in-out;
+        }
+
+        .stillness-cloud {
+            width: 350px;
+            height: 350px;
+            background: var(--slate-blue);
+            bottom: 10%;
+            left: 5%;
+            animation: drift 15s infinite ease-in-out;
+        }
+
+        .balance-sphere {
+            width: 200px;
+            height: 200px;
+            background: var(--sage-green);
+            top: 60%;
+            right: 15%;
+            animation: breathe 10s infinite ease-in-out;
+        }
+
+        @keyframes pulse-energy {
+            0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.25; }
+            50% { transform: scale(1.2) translate(20px, -20px); opacity: 0.35; }
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 30px); }
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.2; }
+            50% { transform: scale(1.15); opacity: 0.3; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeDown 0.8s ease;
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            background: var(--gradient-fire);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--slate);
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.08) 0%, rgba(74, 85, 103, 0.08) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--fire-orange);
+            margin: 2rem auto;
+            max-width: 800px;
+            font-style: italic;
+            color: var(--midnight);
+            line-height: 1.8;
+        }
+
+        /* Navigation */
+        .nav-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid transparent;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .nav-pill.active {
+            background: var(--gradient-balance);
+            color: white;
+            border-color: transparent;
+        }
+
+        .symbol {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-balance);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            color: var(--midnight);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-balance);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Polarity Section */
+        .polarity-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            align-items: stretch;
+        }
+
+        .polarity-side {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .polarity-side:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .polarity-drive {
+            border-top: 4px solid var(--fire-orange);
+        }
+
+        .polarity-stillness {
+            border-top: 4px solid var(--slate-blue);
+        }
+
+        .polarity-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--sage-green);
+            font-weight: bold;
+        }
+
+        .polarity-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .polarity-title.drive {
+            color: var(--fire-orange);
+        }
+
+        .polarity-title.stillness {
+            color: var(--slate-blue);
+        }
+
+        .polarity-content {
+            color: var(--slate);
+            line-height: 1.8;
+        }
+
+        .polarity-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .polarity-content li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .polarity-content li::before {
+            content: '◈';
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        /* Station Grid */
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .station-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .station-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: var(--gradient-balance);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .station-card:hover::before {
+            opacity: 1;
+        }
+
+        .station-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(20, 184, 166, 0.2);
+        }
+
+        .station-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .station-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--midnight);
+            margin-bottom: 0.5rem;
+        }
+
+        .station-subtitle {
+            color: var(--deep-teal);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .station-description {
+            color: var(--slate);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-list {
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.05) 0%, rgba(20, 184, 166, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--sage-green);
+        }
+
+        .prompt-list h4 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .prompt-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .prompt-list li {
+            padding: 0.75rem 0;
+            color: var(--midnight);
+            line-height: 1.6;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .prompt-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--sage-green);
+        }
+
+        /* Integration Section */
+        .integration-box {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(74, 85, 103, 0.05) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .integration-box h3 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .integration-questions {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .integration-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 3px solid var(--fire-orange);
+        }
+
+        .integration-item h4 {
+            color: var(--midnight);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .integration-item p {
+            color: var(--slate);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Concept Cards */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid rgba(135, 168, 120, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .concept-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.15);
+            border-color: var(--sage-green);
+        }
+
+        .concept-card h3 {
+            color: var(--deep-teal);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .concept-card p {
+            color: var(--slate);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .concept-symbol {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 36px;
+            height: 36px;
+            background: var(--gradient-fire);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 2rem;
+            background: var(--gradient-balance);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(20, 184, 166, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            .nav-pills { flex-direction: column; align-items: center; }
+            .polarity-container {
+                grid-template-columns: 1fr;
+            }
+            .polarity-divider {
+                transform: rotate(90deg);
+                height: 40px;
+            }
+            .station-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating background elements -->
+    <div class="bg-element energy-particle"></div>
+    <div class="bg-element stillness-cloud"></div>
+    <div class="bg-element balance-sphere"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Drive & Stillness</h1>
+            <p class="subtitle">Exploring the Sacred Tension Between Motion and Rest</p>
+        </div>
+
+        <div class="quote-box">
+            "The fire that warms us also consumes. The stillness that rests us can also entrap. 
+            We are called to dance between these forces, honoring both the lightning strike of motivation 
+            and the deep well of necessary pause."
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-pills">
+            <button class="nav-pill active" onclick="showPage(0)">
+                <span class="symbol">◈</span> Understanding the Forces
+            </button>
+            <button class="nav-pill" onclick="showPage(1)">
+                <span class="symbol">✦</span> Creative Stations
+            </button>
+            <button class="nav-pill" onclick="showPage(2)">
+                <span class="symbol">◉</span> Integration & Reflection
+            </button>
+        </div>
+
+        <!-- Page 1: Understanding -->
+        <div class="page active" id="page1">
+            <!-- The Polarity -->
+            <div class="card">
+                <h2>
+                    <div class="icon">⚡</div>
+                    The Sacred Polarity
+                </h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 2rem;">
+                    We exist between two fundamental forces: the fire of motivation that propels us forward, 
+                    and the gravity of stillness that grounds us in place. Neither is inherently good or bad—both 
+                    are necessary, and both have shadow aspects. Our healing comes from understanding when each serves us.
+                </p>
+
+                <div class="polarity-container">
+                    <div class="polarity-side polarity-drive">
+                        <div class="polarity-title drive">
+                            ⚡ DRIVE ◈ The Forward Force
+                        </div>
+                        <div class="polarity-content">
+                            <p style="margin-bottom: 1rem;"><strong>Light Aspects:</strong></p>
+                            <ul>
+                                <li>Momentum & forward motion</li>
+                                <li>Creative inspiration & passion</li>
+                                <li>Dopamine's reward pathway</li>
+                                <li>Goals achieved, dreams pursued</li>
+                                <li>Aliveness & engagement with life</li>
+                            </ul>
+                            <p style="margin: 1.5rem 0 1rem;"><strong>Shadow Aspects:</strong></p>
+                            <ul>
+                                <li>Compulsive productivity</li>
+                                <li>Inability to rest or be still</li>
+                                <li>Burnout & exhaustion</li>
+                                <li>Addiction to novelty/stimulation</li>
+                                <li>Running from difficult feelings</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="polarity-divider">⟷</div>
+
+                    <div class="polarity-side polarity-stillness">
+                        <div class="polarity-title stillness">
+                            ◉ STILLNESS ◈ The Holding Ground
+                        </div>
+                        <div class="polarity-content">
+                            <p style="margin-bottom: 1rem;"><strong>Light Aspects:</strong></p>
+                            <ul>
+                                <li>Deep rest & restoration</li>
+                                <li>Contemplation & integration</li>
+                                <li>Presence in the moment</li>
+                                <li>Conservation of energy</li>
+                                <li>Wisdom of non-action</li>
+                            </ul>
+                            <p style="margin: 1.5rem 0 1rem;"><strong>Shadow Aspects:</strong></p>
+                            <ul>
+                                <li>Lethargy & inertia</li>
+                                <li>Avoidance & withdrawal</li>
+                                <li>Depression's heavy gravity</li>
+                                <li>Fear of engagement</li>
+                                <li>Stuck in patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Neuroscience -->
+            <div class="card">
+                <h2>
+                    <div class="icon">⚗</div>
+                    The Alchemy of Motivation
+                </h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Understanding the neurochemistry of drive and inertia can help us work WITH our nervous 
+                    systems rather than against them.
+                </p>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <span class="concept-symbol">D</span>
+                        <h3>Dopamine's Dance</h3>
+                        <p>The neurotransmitter of anticipation, motivation, and reward. It drives us toward 
+                        goals, creating the sensation of "wanting." Both essential for life and potentially 
+                        addictive when dysregulated.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <span class="concept-symbol">S</span>
+                        <h3>Serotonin's Stillness</h3>
+                        <p>The neurochemical of contentment and satisfaction. It helps us feel "enough" and 
+                        settled. Low levels can manifest as restlessness or inertia depending on the system.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <span class="concept-symbol">N</span>
+                        <h3>Norepinephrine's Energy</h3>
+                        <p>The alertness neurotransmitter. It mobilizes our resources, prepares us for action, 
+                        and helps us focus. Too much creates agitation; too little creates fog.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <span class="concept-symbol">G</span>
+                        <h3>GABA's Brake System</h3>
+                        <p>The calming neurotransmitter that helps us slow down and rest. It's the brake to 
+                        dopamine's accelerator. Essential for sleep, anxiety regulation, and feeling safe.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(135, 168, 120, 0.05) 100%); border-radius: 12px;">
+                    <h3 style="color: var(--deep-teal); margin-bottom: 1rem;">The Wisdom of Balance</h3>
+                    <p style="color: var(--slate); line-height: 1.8;">
+                        Our nervous systems are designed to oscillate—to move between activation and rest, 
+                        drive and recovery. Problems arise when we get stuck in one state. Depression can 
+                        manifest as trapped stillness OR frantic, empty motion. True health is the ability 
+                        to flow between these states as needed.
+                    </p>
+                </div>
+            </div>
+
+            <!-- When Each Serves -->
+            <div class="card">
+                <h2>
+                    <div class="icon">⚖</div>
+                    Discernment Practice
+                </h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+                    Not all stillness is inertia. Not all drive is healthy motivation. Learning to discern 
+                    the difference is a crucial life skill.
+                </p>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>Healthy Drive</h3>
+                        <p>Feels sustainable, aligned with values, energizing. Connected to purpose and meaning. 
+                        You can still rest. Movement toward something, not away from discomfort.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Compulsive Drive</h3>
+                        <p>Feels frantic, unsustainable, desperate. Cannot stop or slow down. Driven by anxiety 
+                        or inadequacy. Running from feelings rather than toward goals.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Restorative Stillness</h3>
+                        <p>Feels nourishing, intentional, peaceful. A chosen pause that replenishes. You trust 
+                        you'll move again when ready. Wisdom of conservation and integration.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Stuck Inertia</h3>
+                        <p>Feels heavy, trapped, hopeless. Want to move but can't. Disconnected from agency or 
+                        purpose. The gravity of depression or trauma response.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Creative Stations -->
+        <div class="page" id="page2">
+            <div class="card">
+                <h2>
+                    <div class="icon">◈</div>
+                    Seven Stations of Exploration
+                </h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 2rem;">
+                    Move freely between stations, spending time where you feel called. There is no "right way" 
+                    to do this work. Your body, your art, your wisdom. Each station invites you to explore the 
+                    polarity of drive and stillness through a different creative lens.
+                </p>
+
+                <div class="station-grid">
+                    <!-- Visual Arts -->
+                    <div class="station-card">
+                        <span class="station-icon">◈</span>
+                        <h3 class="station-title">Visual Arts</h3>
+                        <p class="station-subtitle">Collage ◈ Drawing ◈ Painting ◈ Mixed Media</p>
+                        <p class="station-description">
+                            Create visual representations of your relationship with momentum and stillness. 
+                            Let colors, shapes, and textures tell the story your words cannot capture.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Creative Invitations:</h4>
+                            <ul>
+                                <li>Draw your drive/motivation as a creature or force of nature</li>
+                                <li>Create a collage of your ideal balance between action and rest</li>
+                                <li>Paint the feeling of being stuck—what color is inertia?</li>
+                                <li>Illustrate your dopamine reward system as a landscape or machine</li>
+                                <li>Make a before/after of energy depleted vs. restored</li>
+                                <li>Create an abstract representation of "just enough" energy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Movement -->
+                    <div class="station-card">
+                        <span class="station-icon">⚡</span>
+                        <h3 class="station-title">Movement & Dance</h3>
+                        <p class="station-subtitle">Embodiment ◈ Somatic Exploration ◈ Dance</p>
+                        <p class="station-description">
+                            Your body holds the memory of both lightning and stone. Move the energy that 
+                            lives in your cells—the drive that propels you, the weight that holds you.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Movement Explorations:</h4>
+                            <ul>
+                                <li>Dance your motivation—sharp, fast, electric movements</li>
+                                <li>Embody inertia—move as if through thick water or mud</li>
+                                <li>Find the rhythm of your natural energy cycle</li>
+                                <li>Move from stuck to flowing—what shifts you?</li>
+                                <li>Create a movement phrase that represents balance</li>
+                                <li>Dance a dialogue between your driven part and your tired part</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Music/Sound -->
+                    <div class="station-card">
+                        <span class="station-icon">∿</span>
+                        <h3 class="station-title">Music & Sound</h3>
+                        <p class="station-subtitle">Voice ◈ Rhythm ◈ Instruments ◈ Playlist</p>
+                        <p class="station-description">
+                            Sound moves energy in ways nothing else can. Create sonic landscapes that 
+                            capture the tempo of drive and the silence of stillness.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Sonic Invitations:</h4>
+                            <ul>
+                                <li>Create a playlist for when you need momentum</li>
+                                <li>Create a playlist for when you need to honor stillness</li>
+                                <li>Make sounds that represent dopamine spikes</li>
+                                <li>Experiment with rhythm—fast vs slow, steady vs erratic</li>
+                                <li>Find the sound of being stuck (silence? noise? repetition?)</li>
+                                <li>Compose a "getting unstuck" soundscape</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Writing -->
+                    <div class="station-card">
+                        <span class="station-icon">ᚱ</span>
+                        <h3 class="station-title">Creative Writing</h3>
+                        <p class="station-subtitle">Poetry ◈ Story ◈ Letters ◈ Stream of Consciousness</p>
+                        <p class="station-description">
+                            Words can illuminate the interior landscape of motivation and inertia. 
+                            Write from the place that knows both the necessity of motion and the gift of pause.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Writing Prompts:</h4>
+                            <ul>
+                                <li>Write a letter from your motivation to your inertia</li>
+                                <li>Create a myth or story about the origin of drive and stillness</li>
+                                <li>Journal: "I am most driven when..." / "I feel most stuck when..."</li>
+                                <li>Write a poem about dopamine—praise it and warn about it</li>
+                                <li>Describe the physical sensation of momentum in your body</li>
+                                <li>Free write: "The last time I couldn't move forward..."</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Drama -->
+                    <div class="station-card">
+                        <span class="station-icon">⊕</span>
+                        <h3 class="station-title">Drama & Embodiment</h3>
+                        <p class="station-subtitle">Role Play ◈ Psychodrama ◈ Character Work</p>
+                        <p class="station-description">
+                            Embody the different forces within you. Give voice and presence to both 
+                            your inner motivator and your exhausted, immobilized self.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Dramatic Explorations:</h4>
+                            <ul>
+                                <li>Enact a debate between your driven part and your tired part</li>
+                                <li>Create a character who embodies pure motivation—what do they want?</li>
+                                <li>Become the voice of your inertia—what is it protecting you from?</li>
+                                <li>Stage a scene: the moment you shifted from stuck to moving</li>
+                                <li>Embody dopamine as a character—charming but dangerous</li>
+                                <li>Roleplay a conversation with your younger self about energy</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Fashion/Adornment -->
+                    <div class="station-card">
+                        <span class="station-icon">✧</span>
+                        <h3 class="station-title">Fashion & Adornment</h3>
+                        <p class="station-subtitle">Costume ◈ Fabric ◈ Symbolic Objects ◈ Color</p>
+                        <p class="station-description">
+                            What do we wear when we're driven? What do we choose when we're at rest? 
+                            Explore how external expression reflects internal energy states.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Adornment Invitations:</h4>
+                            <ul>
+                                <li>Create a "costume of momentum"—what colors, textures, symbols?</li>
+                                <li>Design an outfit for deep rest that honors rather than judges</li>
+                                <li>Make a wearable symbol of balance between drive and stillness</li>
+                                <li>Explore textures: sharp/soft, heavy/light, restricting/flowing</li>
+                                <li>Create a talisman to carry when you need energy</li>
+                                <li>Design jewelry or objects that represent your relationship with rest</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Open Intuitive -->
+                    <div class="station-card" style="border: 3px solid var(--sage-green);">
+                        <span class="station-icon">◉</span>
+                        <h3 class="station-title">Open Intuitive Exploration</h3>
+                        <p class="station-subtitle">Your Choice ◈ Combined Modalities ◈ Pure Play</p>
+                        <p class="station-description">
+                            Follow your intuition. Combine any modalities that call to you. Create in 
+                            whatever way wants to emerge. This is your space for pure creative freedom.
+                        </p>
+                        <div class="prompt-list">
+                            <h4>Freedom Invitations:</h4>
+                            <ul>
+                                <li>What wants to be made? What wants to move through you?</li>
+                                <li>Combine movement and visual art—dance and paint simultaneously</li>
+                                <li>Create without planning—let the work unfold organically</li>
+                                <li>Make something that represents your wise relationship with energy</li>
+                                <li>Explore playfully—what happens when you stop "trying"?</li>
+                                <li>Trust that your creative process itself is the teaching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Integration -->
+        <div class="page" id="page3">
+            <div class="card">
+                <h2>
+                    <div class="icon">◉</div>
+                    Integration & Reflection
+                </h2>
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 2rem;">
+                    Take time to gather what emerged in your creative explorations. These questions invite 
+                    you to synthesize insights and consider how you might carry this awareness forward.
+                </p>
+
+                <div class="integration-box">
+                    <h3>Reflection Questions</h3>
+                    <div class="integration-questions">
+                        <div class="integration-item">
+                            <h4>◈ What surprised you?</h4>
+                            <p>What did you discover about your relationship with motivation and stillness 
+                            that you hadn't fully recognized before?</p>
+                        </div>
+
+                        <div class="integration-item">
+                            <h4>◈ Where do you find yourself on the spectrum?</h4>
+                            <p>Are you currently experiencing more drive or more inertia? Is this serving you, 
+                            or is change needed?</p>
+                        </div>
+
+                        <div class="integration-item">
+                            <h4>◈ What is the shadow teaching you?</h4>
+                            <p>If you're stuck in compulsive drive OR trapped in inertia, what is that 
+                            state protecting you from? What would it cost to shift?</p>
+                        </div>
+
+                        <div class="integration-item">
+                            <h4>◈ What does balance look like for you?</h4>
+                            <p>Not a perfect 50/50, but a sustainable rhythm. What would it feel like to 
+                            honor both your need for motion and your need for rest?</p>
+                        </div>
+
+                        <div class="integration-item">
+                            <h4>◈ What permission do you need to give yourself?</h4>
+                            <p>Permission to rest without guilt? Permission to pursue without shame? 
+                            Permission to be messy, uncertain, in process?</p>
+                        </div>
+
+                        <div class="integration-item">
+                            <h4>◈ What one small shift might you make?</h4>
+                            <p>Not a complete transformation, but one experiment. One small practice. 
+                            One gentle invitation to yourself.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carrying Forward -->
+            <div class="card">
+                <h2>
+                    <div class="icon">✦</div>
+                    Carrying the Wisdom Forward
+                </h2>
+                
+                <div style="background: linear-gradient(135deg, rgba(135, 168, 120, 0.08) 0%, rgba(20, 184, 166, 0.08) 100%); padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <h3 style="color: var(--deep-teal); margin-bottom: 1rem;">Practices for Balance</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--fire-orange); margin-bottom: 0.75rem;">When You Need Drive:</h4>
+                        <ul style="color: var(--slate); line-height: 1.8; list-style: none; padding-left: 1.5rem;">
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Start with tiny actions—momentum builds on itself
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Connect action to meaning—why does this matter to you?
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Move your body—physical movement catalyzes mental momentum
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Borrow energy from others—connection is activating
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Lower the bar—perfectionism is a form of inertia
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--slate-blue); margin-bottom: 0.75rem;">When You Need Stillness:</h4>
+                        <ul style="color: var(--slate); line-height: 1.8; list-style: none; padding-left: 1.5rem;">
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Notice the resistance to rest—what are you afraid will happen?
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Practice restorative activities without productivity demands
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Trust the cycles—nature has seasons, so do you
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Reframe rest as productive—your nervous system needs recovery
+                            </li>
+                            <li style="position: relative; padding: 0.5rem 0;">
+                                <span style="position: absolute; left: -1.5rem;">◈</span>
+                                Notice the wisdom in the pause—sometimes "not yet" is the answer
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 16px; border: 2px solid var(--sage-green);">
+                    <h3 style="color: var(--deep-teal); margin-bottom: 1rem;">A Closing Reflection</h3>
+                    <p style="color: var(--midnight); line-height: 1.9; font-size: 1.05rem; font-style: italic;">
+                        You are not broken when you feel stuck. You are not failing when you cannot rest. 
+                        These are human experiences, part of the complex dance of being embodied. The goal 
+                        is not perfect balance but compassionate awareness—the ability to notice where you 
+                        are, honor what you're experiencing, and gently offer yourself what you need.
+                    </p>
+                    <p style="color: var(--midnight); line-height: 1.9; font-size: 1.05rem; margin-top: 1rem; font-style: italic;">
+                        Sometimes you will burn bright with motivation. Sometimes you will rest in the 
+                        darkness of stillness. Sometimes you will be trapped in patterns that don't serve you. 
+                        All of this is part of your healing, your growth, your becoming. May you hold yourself 
+                        with tenderness through all of it.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="card">
+                <h2>
+                    <div class="icon">ᛋ</div>
+                    Further Exploration
+                </h2>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>Neuroscience Resources</h3>
+                        <p>Explore dopamine, motivation, and reward systems through books like "Dopamine Nation" 
+                        by Anna Lembke and "The Molecule of More" by Lieberman & Long.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Buddhist Psychology</h3>
+                        <p>The Middle Way philosophy offers wisdom on balancing effort and ease. Explore teachings 
+                        on "virya" (energy) and the importance of right effort.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Polyvagal Theory</h3>
+                        <p>Understanding nervous system states (mobilization, immobilization, social engagement) 
+                        can illuminate patterns of drive and shutdown.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>Somatic Practices</h3>
+                        <p>Body-based approaches like Somatic Experiencing, Feldenkrais, or authentic movement 
+                        can help release stuck patterns and build sustainable energy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageIndex) {
+            const pages = document.querySelectorAll('.page');
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === pageIndex);
+            });
+            
+            pills.forEach((pill, index) => {
+                pill.classList.toggle('active', index === pageIndex);
+            });
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add entrance animations to station cards
+        window.addEventListener('load', () => {
+            const stationCards = document.querySelectorAll('.station-card');
+            stationCards.forEach((card, index) => {
+                card.style.animation = `fadeIn 0.6s ease ${index * 0.1}s both`;
+            });
+
+            const conceptCards = document.querySelectorAll('.concept-card');
+            conceptCards.forEach((card, index) => {
+                card.style.animation = `fadeIn 0.6s ease ${index * 0.1}s both`;
+            });
+        });
+
+        // Interactive hover effects for polarity sides
+        document.querySelectorAll('.polarity-side').forEach(side => {
+            side.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            side.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
